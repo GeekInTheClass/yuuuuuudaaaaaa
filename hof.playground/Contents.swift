@@ -12,6 +12,16 @@ func f1(start:Int, end:Int)->Int{
 var answer1=f1(start:start1, end:end1)
 print(answer1)
 
+/* HoF Solution */
+
+let input1:[Int] = Array(start1...end1)
+let result1 = input1.reduce(0, {(acc, element) -> Int in
+    if (element % 2 == 0) { return acc + element }
+    else if (element % 3 == 0) { return acc + element }
+    else { return acc + 0 }
+})
+
+print(result1)
 
 //[start2...end2] 배열을 받는다. 10보다 작은 수는 -부호로 바꿔주고 모든 원소의 합을 출력한다.
 var start2:Int = 1
@@ -28,8 +38,15 @@ func f2(start:Int, end:Int)->Int{
 var answer2 = f2(start:start2, end:end2)
 print(answer2)
 
+/* HoF Solution */
 
+let input2:[Int] = Array(start2...end2)
+let result2 = input2.reduce(0, {(acc, element) -> Int in
+    if (element < 10) { return acc - element }
+    else { return acc + element }
+})
 
+print(result2)
 
 //입력된 배열중에서 10보다 작은 원소중의 최댓값을 출력(정답은 0보다 크다)
 func f3(array:[Int])->Int{
@@ -48,6 +65,19 @@ var array3:[Int] = [1, 23, 22, 17, 84, 11, 8, 2, 4, 3, 5, 1, 2, -1 ,-3]
 var answer3 = f3(array:array3)
 print(answer3)
 
+/* HoF Solution */
+
+let result3 = array3.reduce(0, {(acc, element) -> Int in
+    if (element < 10) {
+        if (element > acc) {
+            return element
+        }
+    }
+    return acc
+})
+
+print(result3)
+
 
 //배열에있는 숫자들 곱해서 출력하기
 var numbers = [3,2,7,5,4,1]
@@ -62,6 +92,16 @@ func mult() -> (){
 
 
 mult()
+
+/* HoF Solution */
+
+let result4 = numbers.reduce(1, {(acc, element) -> Int in
+    return acc * element
+})
+
+print(result4)
+
+
 //배열에 있는 숫자들 내림차순으로 정렬해서 출력하기
 func dsort() -> (){
     for x in 0...numbers.count-2{
@@ -78,3 +118,13 @@ func dsort() -> (){
     print(numbers[numbers.count-1])
 }
 dsort()
+
+/* HoF Solution */
+
+let result5: String = numbers.sorted(by: {(a, b) -> Bool in
+    return a > b
+}).reduce("", {(acc, element) -> String in
+    return acc + " " + String(element)
+})
+
+print(result5)
